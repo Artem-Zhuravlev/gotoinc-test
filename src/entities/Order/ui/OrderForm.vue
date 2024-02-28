@@ -9,7 +9,7 @@
         >
           <v-text-field
             v-model="form.city_from"
-            :rules="requiredFieldValidation"
+            :rules="requiredField"
             label="City from"
             required
           />
@@ -21,7 +21,7 @@
         >
           <v-text-field
             v-model="form.city_to"
-            :rules="requiredFieldValidation"
+            :rules="requiredField"
             label="City to"
             required
           />
@@ -33,7 +33,7 @@
         <v-select
           label="Select type of parcel"
           v-model="form.parcel_type"
-          :items="['Gadgets', 'Drinks', 'Clothes', 'Medicines', 'Other']"
+          :items="parcels"
         />
         </v-col>
         <v-col
@@ -43,7 +43,7 @@
           <v-text-field
             v-model="form.dispatch_date"
             type="datetime-local"
-            :rules="requiredFieldValidation"
+            :rules="requiredField"
             label="Date of dispatch"
             required
           />
@@ -73,8 +73,11 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
+import { requiredField } from '@/utils/validators';
+import { PARCELS_LIST } from '../model/types/parcels';
 
 const valid = ref(false);
+const parcels = ref(PARCELS_LIST);
 
 const form = reactive({
   city_from: '',
@@ -83,12 +86,5 @@ const form = reactive({
   dispatch_date: null,
   parcel_description: '',
 });
-
-const requiredFieldValidation = [
-  (value: string): string | boolean => {
-    if (value) return true;
-    return 'Field is required.';
-  },
-];
 
 </script>
