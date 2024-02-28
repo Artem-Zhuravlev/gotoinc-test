@@ -1,18 +1,20 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <VaForm ref="formRef" class="flex flex-col items-baseline gap-6">
+      <VaInput
+        v-model="form.firstName"
+        :rules="[(value) => (value && value.length > 0) || 'First name is required']"
+        label="firstName"
+      />
+    </VaForm>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+<script setup lang="ts">
+import { reactive } from 'vue';
+import { useForm } from 'vuestic-ui';
 
-export default defineComponent({
-  name: 'HomeView',
-  components: {
-    HelloWorld,
-  },
+const form = reactive({
+  firstName: '',
 });
 </script>
