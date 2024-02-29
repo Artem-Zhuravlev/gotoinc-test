@@ -1,19 +1,41 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import HomeView from '../views/RequestsView.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
+    redirect: '/requests',
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    path: '/requests',
+    name: 'requests',
+    component: () => import(/* webpackChunkName: "requests" */ '../views/RequestsView.vue'),
+  },
+  {
+    path: '/:id',
+    redirect: (to) => {
+      return { path: `/${to.params.id}/request` };
+    },
+  },
+  {
+    path: '/:id/request',
+    name: 'request',
+    component: () => import(/* webpackChunkName: "request" */ '../views/RequestView.vue'),
+  },
+  {
+    path: '/:id/create/order',
+    name: 'create-order',
+    component: () => import(/* webpackChunkName: "create-order" */ '../views/CreateOrder.vue'),
+  },
+  {
+    path: '/:id/create/deliver',
+    name: 'create-deliver',
+    component: () => import(/* webpackChunkName: "create-deliver" */ '../views/CreateDeliver.vue'),
+  },
+  {
+    path: '/:id/create',
+    name: 'create',
+    component: () => import(/* webpackChunkName: "create" */ '../views/CreateView.vue'),
   },
 ];
 
