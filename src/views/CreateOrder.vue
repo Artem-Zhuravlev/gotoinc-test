@@ -5,6 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import OrderForm from '@/entities/Order';
+import { OrderForm } from '@/entities/Order';
 import { BackButtonLayout } from '@/layouts';
 </script>

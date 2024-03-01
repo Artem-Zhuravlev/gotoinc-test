@@ -5,6 +5,6 @@
 </template>
 
 <script setup lang="ts">
-import DeliverForm from '@/entities/Deliver';
+import { DeliverForm } from '@/entities/Deliver';
 import { BackButtonLayout } from '@/layouts';
 </script>
