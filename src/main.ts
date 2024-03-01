@@ -4,8 +4,8 @@ import 'vuetify/styles/main.css';
 import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
-import { aliases, mdi } from 'vuetify/iconsets/mdi';
-import '@mdi/font/css/materialdesignicons.css';
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
+import { mdiArrowLeft } from '@mdi/js';
 import router from './router';
 import store from './store';
 import App from './App.vue';
@@ -15,7 +15,10 @@ const vuetify = createVuetify({
   directives,
   icons: {
     defaultSet: 'mdi',
-    aliases,
+    aliases: {
+      ...aliases,
+      arrowLeft: mdiArrowLeft,
+    },
     sets: {
       mdi,
     },

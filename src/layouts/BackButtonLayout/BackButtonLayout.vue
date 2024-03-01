@@ -8,7 +8,7 @@
     >
       <v-icon
         start
-        icon="mdi-arrow-left"
+        icon="$arrowLeft"
       />
       To create page
     </button-base>
