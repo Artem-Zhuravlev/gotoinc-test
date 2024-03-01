@@ -59,11 +59,11 @@
         <v-col
           cols="12"
         >
-          <v-btn
+          <button-base
             type="submit"
-            size="large"
-            color="cyan-lighten-1"
-          >Submit</v-btn>
+          >
+            Submit
+          </button-base>
         </v-col>
 
       </v-row>
@@ -74,6 +74,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { requiredField } from '@/utils/validators';
+import { ButtonBase } from '@/shared';
 import { PARCELS_LIST } from '../model/types/parcels';
 
 const valid = ref(false);
