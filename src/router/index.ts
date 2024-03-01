@@ -13,28 +13,34 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:id',
     redirect: (to) => {
-      return { path: `/${to.params.id}/request` };
+      return { path: `/${to.params.id}/requests` };
     },
   },
   {
-    path: '/:id/request',
+    path: '/:id/requests',
     name: 'request',
     component: () => import(/* webpackChunkName: "request" */ '../views/RequestView.vue'),
   },
   {
-    path: '/:id/create/order',
-    name: 'create-order',
-    component: () => import(/* webpackChunkName: "create-order" */ '../views/CreateOrder.vue'),
-  },
-  {
-    path: '/:id/create/deliver',
-    name: 'create-deliver',
-    component: () => import(/* webpackChunkName: "create-deliver" */ '../views/CreateDeliver.vue'),
-  },
-  {
     path: '/:id/create',
-    name: 'create',
-    component: () => import(/* webpackChunkName: "create" */ '../views/CreateView.vue'),
+    children: [
+      {
+        path: '',
+        name: 'create',
+        component: () => import(/* webpackChunkName: "create" */ '../views/CreateView.vue'),
+      },
+      {
+        path: 'order',
+        name: 'create-order',
+        component: () => import(/* webpackChunkName: "create-order" */ '../views/CreateOrder.vue'),
+      },
+      {
+        path: 'deliver',
+        name: 'create-deliver',
+        component: () =>
+          import(/* webpackChunkName: "create-deliver" */ '../views/CreateDeliver.vue'),
+      },
+    ],
   },
 ];
 
