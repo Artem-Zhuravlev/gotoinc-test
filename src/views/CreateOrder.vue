@@ -1,9 +1,10 @@
 <template>
-  <div class="create-order">
+  <back-button-layout>
     <order-form />
-  </div>
+  </back-button-layout>
 </template>
 
 <script setup lang="ts">
 import OrderForm from '@/entities/Order';
+import { BackButtonLayout } from '@/layouts';
 </script>

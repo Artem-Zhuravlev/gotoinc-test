@@ -1,9 +1,10 @@
 <template>
-  <div class="create-deliver">
+  <back-button-layout>
     <deliver-form />
-  </div>
+  </back-button-layout>
 </template>
 
 <script setup lang="ts">
 import DeliverForm from '@/entities/Deliver';
+import { BackButtonLayout } from '@/layouts';
 </script>
