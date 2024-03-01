@@ -1,14 +1,10 @@
-import { createStore } from 'vuex';
+import { createStore, Store } from 'vuex';
+import idCreatorModule from './modules/idCreatorModule';
 
-export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+const store = createStore({
   modules: {
+    idCreatorModule,
   },
 });
+
+export default store;
