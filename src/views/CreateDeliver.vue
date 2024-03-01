@@ -1,9 +1,9 @@
 <template>
   <div class="create-deliver">
-    <order-form />
+    <deliver-form />
   </div>
 </template>
 
 <script setup lang="ts">
-import OrderForm from '@/entities/Order';
+import DeliverForm from '@/entities/Deliver';
 </script>

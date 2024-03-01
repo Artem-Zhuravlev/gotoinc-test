@@ -1,10 +1,7 @@
 import { createStore, Store } from 'vuex';
-import idCreatorModule from './modules/idCreatorModule';
 
 const store = createStore({
-  modules: {
-    idCreatorModule,
-  },
+  modules: {},
 });
 
 export default store;
