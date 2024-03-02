@@ -18,7 +18,7 @@ import { RouteLocationRaw } from 'vue-router';
 
 type VariantType = 'flat' | 'text' | 'elevated' | 'tonal' | 'outlined' | 'plain';
 
-const props = defineProps({
+defineProps({
   to: [String, Object] as PropType<RouteLocationRaw>,
   type: {
     type: String,

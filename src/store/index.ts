@@ -1,7 +1,10 @@
-import { createStore, Store } from 'vuex';
+import { createStore } from 'vuex';
+import { requestModule } from './modules/requestModule';
 
 const store = createStore({
-  modules: {},
+  modules: {
+    requestModule,
+  },
 });
 
 export default store;

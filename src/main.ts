@@ -5,7 +5,7 @@ import { createVuetify } from 'vuetify';
 import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
-import { mdiArrowLeft } from '@mdi/js';
+import { mdiArrowLeft, mdiCalendar } from '@mdi/js';
 import router from './router';
 import store from './store';
 import App from './App.vue';
@@ -18,6 +18,7 @@ const vuetify = createVuetify({
     aliases: {
       ...aliases,
       arrowLeft: mdiArrowLeft,
+      calendar: mdiCalendar,
     },
     sets: {
       mdi,

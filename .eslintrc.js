@@ -14,5 +14,8 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'arrow-body-style': 'off',
     'implicit-arrow-linebreak': 'off',
+    camelcase: 'off',
+    'no-shadow': 'off',
+    'no-restricted-syntax': 'off',
   },
 };
