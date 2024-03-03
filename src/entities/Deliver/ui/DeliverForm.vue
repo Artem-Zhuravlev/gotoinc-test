@@ -29,12 +29,11 @@
         cols="12"
         md="6"
       >
-        <v-text-field
+        <date-picker
           v-model="form.dispatch_date"
-          type="datetime-local"
           :rules="requiredField"
-          label="Date of dispatch"
           required
+          label="Date of dispatch"
         />
       </v-col>
       <v-col
@@ -55,7 +54,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { requiredField } from '@/utils/validators';
-import { ButtonBase } from '@/shared';
+import { ButtonBase, DatePicker } from '@/shared';
 
 const valid = ref(false);
 
