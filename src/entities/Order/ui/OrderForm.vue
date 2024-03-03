@@ -95,13 +95,13 @@ const props = defineProps({
 });
 
 const emit = defineEmits<{
-  (e: 'modelValue', value: RequestSchema): void,
-  (e: 'submitOrderForm'): void,
+  (e: 'update:modelValue', value: RequestSchema): void,
+  (e: 'handleSubmit'): void,
 }>();
 
 const localValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit('modelValue', value as RequestSchema),
+  set: (value) => emit('update:modelValue', value as RequestSchema),
 });
 
 const formRef = ref();
@@ -109,7 +109,7 @@ const formRef = ref();
 const handleSubmit = () => {
   if (!valid.value) { return; }
 
-  emit('submitOrderForm');
+  emit('handleSubmit');
   formRef.value.reset();
   formRef.value.resetValidation();
 };

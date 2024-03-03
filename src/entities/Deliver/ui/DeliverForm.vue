@@ -1,5 +1,9 @@
 <template>
-  <v-form v-model="valid">
+  <v-form
+    v-model="valid"
+    ref="formRef"
+    @submit.prevent="handleSubmit"
+  >
     <h3 class="text-h3 mb-6">Deliver form</h3>
     <v-row>
       <v-col
@@ -7,7 +11,7 @@
         md="6"
       >
         <v-text-field
-          v-model="form.city_from"
+          v-model="localValue.city_from"
           :rules="requiredField"
           label="City from"
           required
@@ -19,7 +23,7 @@
         md="6"
       >
         <v-text-field
-          v-model="form.city_to"
+          v-model="localValue.city_to"
           :rules="requiredField"
           label="City to"
           required
@@ -30,7 +34,7 @@
         md="6"
       >
         <date-picker
-          v-model="form.dispatch_date"
+          v-model="localValue.dispatch_date"
           :rules="requiredField"
           required
           label="Date of dispatch"
@@ -46,24 +50,46 @@
           Submit
         </button-base>
       </v-col>
-
     </v-row>
   </v-form>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import {
+  computed,
+  defineProps,
+  defineEmits,
+  ref,
+} from 'vue';
 import { requiredField } from '@/utils/validators';
 import { ButtonBase, DatePicker } from '@/shared';
+import { RequestDeliverSchema } from '@/entities/Requests';
 
 const valid = ref(false);
+const formRef = ref();
 
-const form = reactive({
-  city_from: '',
-  city_to: '',
-  parcel_type: null,
-  dispatch_date: null,
-  parcel_description: '',
+const props = defineProps({
+  modelValue: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: RequestDeliverSchema): void,
+  (e: 'handleSubmit'): void,
+}>();
+
+const localValue = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value as RequestDeliverSchema),
+});
+
+const handleSubmit = () => {
+  if (!valid.value) { return; }
+
+  emit('handleSubmit');
+  formRef.value.reset();
+  formRef.value.resetValidation();
+};
 </script>

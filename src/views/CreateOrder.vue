@@ -2,7 +2,7 @@
   <back-button-layout>
     <order-form
       v-model="form"
-      @submitOrderForm="handleSubmit"
+      @handle-submit="submitOrderForm"
     />
   </back-button-layout>
 </template>
@@ -18,6 +18,7 @@ import { BackButtonLayout } from '@/layouts';
 const store = useStore();
 const route = useRoute();
 const router = useRouter();
+const userId = route?.params?.id;
 
 const form = reactive({
   city_from: '',
@@ -27,11 +28,10 @@ const form = reactive({
   parcel_description: '',
 });
 
-const handleSubmit = () => {
-  const userId = route?.params?.id;
+const submitOrderForm = () => {
   const request = clonedeep(form);
 
-  store.commit('requestModule/addRequest', { userId, request });
+  store.commit('requestModule/addOrderRequest', { userId, request });
   router.push({ name: 'requests' });
 };
 </script>

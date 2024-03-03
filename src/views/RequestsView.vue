@@ -28,14 +28,14 @@ import { RequestSchema, RequestList } from '@/entities/Requests';
 const sortSwitcher = ref('desc');
 
 const store = useStore();
-const { parcels } = store.state.requestModule;
+const { orderRequests } = store.state.requestModule;
 
 const sortedItemsByDesc = computed<RequestSchema[]>(() => {
-  if (!parcels.length) {
+  if (!orderRequests.length) {
     return [];
   }
 
-  return [...parcels].sort((a: RequestSchema, b: RequestSchema) => {
+  return [...orderRequests].sort((a: RequestSchema, b: RequestSchema) => {
     const dateA = new Date(a.dispatch_date).getTime();
     const dateB = new Date(b.dispatch_date).getTime();
 
@@ -44,11 +44,11 @@ const sortedItemsByDesc = computed<RequestSchema[]>(() => {
 });
 
 const sortedItemsByAsc = computed<RequestSchema[]>(() => {
-  if (!parcels.length) {
+  if (!orderRequests.length) {
     return [];
   }
 
-  return [...parcels].sort((a: RequestSchema, b: RequestSchema) => {
+  return [...orderRequests].sort((a: RequestSchema, b: RequestSchema) => {
     const dateA = new Date(a.dispatch_date).getTime();
     const dateB = new Date(b.dispatch_date).getTime();
 
