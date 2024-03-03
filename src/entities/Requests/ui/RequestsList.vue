@@ -6,32 +6,14 @@
           v-for="(item, i) in items"
           :key="i"
         >
-          <v-card>
-            <template v-slot:text>
-              <p class="text-subtitle-1">
-                From: {{ item.raw.city_from }}
-              </p>
-              <p class="text-subtitle-1">
-                To: {{ item.raw.city_to }}
-              </p>
-              <p
-                v-if="item.raw.parcel_type"
-                class="text-subtitle-1"
-              >
-                Parcel type: {{ item.raw.parcel_type }}
-              </p>
-              <p class="text-subtitle-1">
-                Dispatch date: {{ item.raw.dispatch_date }}
-              </p>
-              <p
-                v-if="item.raw.parcel_description"
-                class="text-subtitle-1">
-                Parcel description: {{ item.raw.parcel_description }}
-              </p>
-            </template>
-          </v-card>
-
-          <br>
+          <request-card
+            :from="item.raw.city_from"
+            :to="item.raw.city_from"
+            :parcel-type="item.raw.parcel_type"
+            :date="item.raw.dispatch_date"
+            :description="item.raw.parcel_description"
+            :with-controls="false"
+          />
         </template>
       </template>
     </v-data-iterator>
@@ -42,6 +24,7 @@
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { RequestSchema } from '../model/types/request';
+import RequestCard from './RequestCard.vue';
 
 const store = useStore();
 const { requestsList } = store.state.requestModule;
