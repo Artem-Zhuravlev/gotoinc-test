@@ -1,9 +1,7 @@
 <template>
-  <div class="home">
-    <order-form />
-  </div>
+  <requests-list />
 </template>
 
 <script setup lang="ts">
-import { OrderForm } from '@/entities/Order';
+import { RequestsList } from '@/entities/Requests';
 </script>

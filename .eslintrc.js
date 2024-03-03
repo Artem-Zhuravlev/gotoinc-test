@@ -17,5 +17,7 @@ module.exports = {
     camelcase: 'off',
     'no-shadow': 'off',
     'no-restricted-syntax': 'off',
+    'no-spaced-func': 'off',
+    'func-call-spacing': 'off',
   },
 };
