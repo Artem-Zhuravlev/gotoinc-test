@@ -2,13 +2,13 @@ import { Module, MutationTree } from 'vuex';
 import { uuid } from 'vue-uuid';
 import { RequestSchema } from '@/entities/Requests';
 
-interface UserSchema extends RequestSchema {
+interface ParcelSchema extends RequestSchema {
   userId: number;
   id: string;
 }
 
 interface UserState {
-  requestsList: UserSchema[];
+  parcels: ParcelSchema[];
 }
 
 interface RequestPayload {
@@ -22,15 +22,15 @@ interface RootState {
 
 const storedUsers = localStorage.getItem('users');
 const state: UserState = {
-  requestsList: storedUsers ? JSON.parse(storedUsers) : [],
+  parcels: storedUsers ? JSON.parse(storedUsers) : [],
 };
 
 const mutations: MutationTree<UserState> = {
   addRequest(state: UserState, payload: RequestPayload) {
     const { userId, request } = payload;
 
-    state.requestsList.push({ id: uuid.v1(), userId, ...request });
-    localStorage.setItem('users', JSON.stringify(state.requestsList));
+    state.parcels.push({ id: uuid.v1(), userId, ...request });
+    localStorage.setItem('users', JSON.stringify(state.parcels));
   },
 };
 

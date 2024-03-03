@@ -84,6 +84,7 @@ const emit = defineEmits<{
   border: 1px solid rgb(var(--v-theme-surface-variant));
   border-radius: 4px;
   padding: 1rem;
+  height: 100%;
   &:not(:last-of-type) {
     margin-bottom: 20px;
   }

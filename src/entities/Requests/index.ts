@@ -1,4 +1,4 @@
-import RequestsList from './ui/RequestsList.vue';
+import RequestList from './ui/RequestList.vue';
 import { RequestSchema } from './model/types/request';
 
-export { RequestsList, RequestSchema };
+export { RequestList, RequestSchema };
