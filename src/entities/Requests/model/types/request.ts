@@ -1,4 +1,5 @@
 export interface RequestSchema {
+  id?: string;
   city_from: string;
   city_to: string;
   parcel_type?: string;

@@ -22,13 +22,13 @@
     >
       <v-btn
         color="light-blue-lighten-4"
-        @click="emit('edit')"
+        @click="emit('edit', id)"
       >
         Edit
       </v-btn>
       <v-btn
         color="red-darken-2"
-        @click="emit('delete')"
+        @click="emit('delete', id)"
       >
         Delete
       </v-btn>
@@ -41,6 +41,10 @@ import { defineProps, defineEmits } from 'vue';
 import { formatDate } from '@/utils/date';
 
 const props = defineProps({
+  id: {
+    type: String,
+    default: '',
+  },
   from: {
     type: String,
     required: true,
@@ -68,8 +72,8 @@ const props = defineProps({
 });
 
 const emit = defineEmits<{
-  (e:'edit'): void,
-  (e:'delete'): void
+  (e:'edit', id: string): void,
+  (e:'delete', id: string): void
 }>();
 </script>
 

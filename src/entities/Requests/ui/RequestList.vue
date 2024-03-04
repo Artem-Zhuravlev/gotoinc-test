@@ -7,18 +7,24 @@
       md="6"
     >
       <request-card
+        :id="item.id"
         :from="item.city_from"
         :to="item.city_from"
         :parcel-type="item.parcel_type"
         :date="item.dispatch_date"
         :description="item.parcel_description"
         :with-controls="withControls"
+        @delete="handleConfirmModal"
       />
     </v-col>
   </v-row>
   <v-row v-else>
     <v-col cols="12">No search results</v-col>
   </v-row>
+  <modal-confirm
+    v-model="showConfirmModal"
+    @delete="handleDelete"
+  />
 </template>
 
 <script setup lang="ts">
@@ -27,8 +33,10 @@ import {
   defineProps,
   PropType,
 } from 'vue';
-import { RequestSchema } from '../model/types/request';
+
+import { ModalConfirm } from '@/shared';
 import RequestCard from './RequestCard.vue';
+import { RequestSchema } from '../model/types/request';
 
 defineProps({
   items: {
@@ -42,9 +50,16 @@ defineProps({
   },
 });
 
-const page = ref(1);
+const showConfirmModal = ref(false);
+const selectedItemId = ref('');
+
+const handleConfirmModal = (id: string) => {
+  showConfirmModal.value = true;
+  selectedItemId.value = id;
+};
+
+const handleDelete = () => {
+  console.log(selectedItemId.value, 'DELETED ITEM');
+};
+
 </script>
-
-<style scoped>
-
-</style>
