@@ -4,6 +4,10 @@
       v-model="form"
       @handle-submit="submitOrderForm"
     />
+
+    <pre>
+      {{ store.state.requestModule.orderRequests }}
+    </pre>
   </back-button-layout>
 </template>
 
@@ -32,6 +36,6 @@ const submitOrderForm = () => {
   const request = clonedeep(form);
 
   store.commit('requestModule/addOrderRequest', { userId, request });
-  router.push({ name: 'requests' });
+  // router.push({ name: 'requests' });
 };
 </script>

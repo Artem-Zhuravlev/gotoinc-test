@@ -19,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/:id/requests',
     name: 'request',
-    component: () => import(/* webpackChunkName: "request" */ '../views/RequestView.vue'),
+    component: () => import(/* webpackChunkName: "request" */ '../views/DeliverRequestsView.vue'),
   },
   {
     path: '/:id/create',

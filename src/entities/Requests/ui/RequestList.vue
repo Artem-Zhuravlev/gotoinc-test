@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-row v-if="items.length">
     <v-col
       v-for="(item, index) in items"
       :key="index"
@@ -12,9 +12,12 @@
         :parcel-type="item.parcel_type"
         :date="item.dispatch_date"
         :description="item.parcel_description"
-        :with-controls="false"
+        :with-controls="withControls"
       />
     </v-col>
+  </v-row>
+  <v-row v-else>
+    <v-col cols="12">No search results</v-col>
   </v-row>
 </template>
 
@@ -23,7 +26,6 @@ import {
   ref,
   defineProps,
   PropType,
-  markRaw,
 } from 'vue';
 import { RequestSchema } from '../model/types/request';
 import RequestCard from './RequestCard.vue';
@@ -32,7 +34,11 @@ defineProps({
   items: {
     type: Array as PropType<RequestSchema[]>,
     required: true,
-    default: () => markRaw([]),
+    default: () => [],
+  },
+  withControls: {
+    type: Boolean,
+    default: false,
   },
 });
 

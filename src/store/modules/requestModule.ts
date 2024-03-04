@@ -1,4 +1,4 @@
-import { Module, MutationTree } from 'vuex';
+import { Module, MutationTree, GetterTree } from 'vuex';
 import { uuid } from 'vue-uuid';
 import { RequestSchema, RequestDeliverSchema } from '@/entities/Requests';
 
@@ -54,13 +54,32 @@ const mutations: MutationTree<RequestState> = {
   },
 };
 
-const getters = {
-  getUserRequests() {
-    if (!state.deliverRequest) {
-      return [];
-    }
+const getters: GetterTree<RequestState, RootState> = {
+  getUserRequests(state) {
+    if (!state.deliverRequest) return [];
 
-    return state.orderRequests.filter((item) => item.userId === state.deliverRequest?.userId);
+    const {
+      city_from,
+      city_to,
+      dispatch_date,
+      userId,
+    } = state.deliverRequest;
+
+    return state.orderRequests.filter((item) =>
+      item.city_from === city_from
+      && item.city_to === city_to
+      && new Date(item.dispatch_date).getTime() === new Date(dispatch_date).getTime()
+      && item.userId === userId);
+  },
+  getOtherUsersRequests(state) {
+    if (!state.deliverRequest) return [];
+
+    const { city_from, city_to, dispatch_date } = state.deliverRequest;
+
+    return state.orderRequests.filter((item) =>
+      item.city_from === city_from
+      && item.city_to === city_to
+      && new Date(item.dispatch_date).getTime() === new Date(dispatch_date).getTime());
   },
 };
 
