@@ -1,6 +1,7 @@
 import { Module, MutationTree, GetterTree } from 'vuex';
 import { uuid } from 'vue-uuid';
 import { RequestSchema, RequestDeliverSchema } from '@/entities/Requests';
+import requestsDb from '@/data';
 
 interface OrderRequest extends RequestSchema {
   userId: number;
@@ -30,6 +31,7 @@ interface RootState {
   requestModule: RequestState;
 }
 
+localStorage.setItem('users', JSON.stringify(requestsDb));
 const storedUsers = localStorage.getItem('users');
 const state: RequestState = {
   orderRequests: storedUsers ? JSON.parse(storedUsers) : [],
@@ -41,6 +43,12 @@ const mutations: MutationTree<RequestState> = {
     const { userId, request } = payload;
 
     state.orderRequests.push({ id: uuid.v1(), userId, ...request });
+    localStorage.setItem('users', JSON.stringify(state.orderRequests));
+  },
+
+  removeOrderRequest(state: RequestState, id: string) {
+    state.orderRequests = state.orderRequests.filter((item) => item.id !== id);
+
     localStorage.setItem('users', JSON.stringify(state.orderRequests));
   },
 
@@ -65,21 +73,34 @@ const getters: GetterTree<RequestState, RootState> = {
       userId,
     } = state.deliverRequest;
 
-    return state.orderRequests.filter((item) =>
-      item.city_from === city_from
-      && item.city_to === city_to
-      && new Date(item.dispatch_date).getTime() === new Date(dispatch_date).getTime()
-      && item.userId === userId);
+    return state.orderRequests.filter(
+      (item) => {
+        return (
+          item.city_from === city_from
+          && item.city_to === city_to
+          && new Date(item.dispatch_date).getTime() === new Date(dispatch_date).getTime()
+          && item.userId === Number(userId)
+        );
+      },
+    );
   },
   getOtherUsersRequests(state) {
     if (!state.deliverRequest) return [];
 
-    const { city_from, city_to, dispatch_date } = state.deliverRequest;
+    const {
+      city_from,
+      city_to,
+      dispatch_date,
+      userId,
+    } = state.deliverRequest;
 
-    return state.orderRequests.filter((item) =>
-      item.city_from === city_from
-      && item.city_to === city_to
-      && new Date(item.dispatch_date).getTime() === new Date(dispatch_date).getTime());
+    return state.orderRequests.filter(
+      (item) =>
+        item.city_from === city_from
+        && item.city_to === city_to
+        && new Date(item.dispatch_date).getTime() === new Date(dispatch_date).getTime()
+        && item.userId !== Number(userId),
+    );
   },
 };
 

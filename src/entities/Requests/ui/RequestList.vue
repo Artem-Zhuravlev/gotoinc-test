@@ -9,7 +9,7 @@
       <request-card
         :id="item.id"
         :from="item.city_from"
-        :to="item.city_from"
+        :to="item.city_to"
         :parcel-type="item.parcel_type"
         :date="item.dispatch_date"
         :description="item.parcel_description"
@@ -33,7 +33,7 @@ import {
   defineProps,
   PropType,
 } from 'vue';
-
+import { useStore } from 'vuex';
 import { ModalConfirm } from '@/shared';
 import RequestCard from './RequestCard.vue';
 import { RequestSchema } from '../model/types/request';
@@ -50,6 +50,7 @@ defineProps({
   },
 });
 
+const store = useStore();
 const showConfirmModal = ref(false);
 const selectedItemId = ref('');
 
@@ -59,7 +60,8 @@ const handleConfirmModal = (id: string) => {
 };
 
 const handleDelete = () => {
-  console.log(selectedItemId.value, 'DELETED ITEM');
+  store.commit('requestModule/removeOrderRequest', selectedItemId.value);
+  showConfirmModal.value = false;
 };
 
 </script>

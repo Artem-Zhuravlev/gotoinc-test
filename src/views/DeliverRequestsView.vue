@@ -15,8 +15,9 @@
 <script setup lang="ts">
 import { useStore } from 'vuex';
 import { RequestList } from '@/entities/Requests';
+import { computed } from 'vue';
 
 const store = useStore();
-const userList = store.getters['requestModule/getUserRequests'];
-const otherUsersList = store.getters['requestModule/getOtherUsersRequests'];
+const userList = computed(() => store.getters['requestModule/getUserRequests']);
+const otherUsersList = computed(() => store.getters['requestModule/getOtherUsersRequests']);
 </script>
