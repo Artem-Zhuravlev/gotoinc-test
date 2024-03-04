@@ -4,7 +4,6 @@
       v-model="form"
       @handle-submit="submitDeliverForm"
     />
-    {{ store.state.requestModule.deliverRequest }}
   </back-button-layout>
 </template>
 

@@ -9,13 +9,15 @@
         :label="label"
         :required="required"
         :rules="rules"
-        :model-value="formattedDate"
+        readonly
+        :model-value="localValue"
         v-bind="props"
       />
     </template>
     <v-date-picker
-      v-model="selectedDate"
+      v-model="localValue"
       hide-actions
+      min
       color="primary"
     >
       <template v-slot:header />
@@ -42,19 +44,17 @@ const props = defineProps([
 const emit = defineEmits(['update:modelValue']);
 
 const isMenuOpen = ref(false);
-const selectedDate = ref(props.modelValue);
+
+const localValue = ref(props.modelValue);
+
+watch(localValue, (newValue) => {
+  emit('update:modelValue', newValue);
+});
 
 const formattedDate = computed(() => {
-  return selectedDate.value
-    ? selectedDate.value.toLocaleDateString()
+  return localValue.value
+    ? localValue.value.toLocaleDateString()
     : '';
 });
 
-watch(props.modelValue, (newDate) => {
-  selectedDate.value = newDate;
-});
-
-watch(selectedDate, (newDate) => {
-  emit('update:modelValue', newDate);
-});
 </script>

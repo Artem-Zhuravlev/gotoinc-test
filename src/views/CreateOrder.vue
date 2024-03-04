@@ -4,10 +4,6 @@
       v-model="form"
       @handle-submit="submitOrderForm"
     />
-
-    <pre>
-      {{ store.state.requestModule.orderRequests }}
-    </pre>
   </back-button-layout>
 </template>
 

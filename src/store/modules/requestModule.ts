@@ -46,6 +46,15 @@ const mutations: MutationTree<RequestState> = {
     localStorage.setItem('users', JSON.stringify(state.orderRequests));
   },
 
+  editOrderRequest(state, payload) {
+    const { id, request } = payload;
+
+    const index = state.orderRequests.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      state.orderRequests.splice(index, 1, request);
+    }
+  },
+
   removeOrderRequest(state: RequestState, id: string) {
     state.orderRequests = state.orderRequests.filter((item) => item.id !== id);
 

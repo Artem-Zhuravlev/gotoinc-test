@@ -6,6 +6,7 @@ import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 import { mdiArrowLeft, mdiCalendar } from '@mdi/js';
+import DayJsAdapter from '@date-io/dayjs';
 import router from './router';
 import store from './store';
 import App from './App.vue';
@@ -23,6 +24,9 @@ const vuetify = createVuetify({
     sets: {
       mdi,
     },
+  },
+  date: {
+    adapter: DayJsAdapter,
   },
 });
 
