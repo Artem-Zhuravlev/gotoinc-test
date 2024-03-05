@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue';
 import { formatDate } from '@/utils/date';
+import { computed } from '@vue/reactivity';
 
 const props = defineProps({
   id: {
@@ -75,6 +76,7 @@ const emit = defineEmits<{
   (e:'edit', id: string): void,
   (e:'delete', id: string): void
 }>();
+
 </script>
 
 <style

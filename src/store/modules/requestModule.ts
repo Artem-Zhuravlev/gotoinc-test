@@ -85,8 +85,8 @@ const getters: GetterTree<RequestState, RootState> = {
     return state.orderRequests.filter(
       (item) => {
         return (
-          item.city_from === city_from
-          && item.city_to === city_to
+          item.city_from.toLowerCase() === city_from.toLowerCase()
+          && item.city_to.toLowerCase() === city_to.toLowerCase()
           && new Date(item.dispatch_date).getTime() === new Date(dispatch_date).getTime()
           && item.userId === Number(userId)
         );
@@ -105,8 +105,8 @@ const getters: GetterTree<RequestState, RootState> = {
 
     return state.orderRequests.filter(
       (item) =>
-        item.city_from === city_from
-        && item.city_to === city_to
+        item.city_from.toLowerCase() === city_from.toLowerCase()
+        && item.city_to.toLowerCase() === city_to.toLowerCase()
         && new Date(item.dispatch_date).getTime() === new Date(dispatch_date).getTime()
         && item.userId !== Number(userId),
     );
